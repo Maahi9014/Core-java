@@ -3,6 +3,7 @@ public class Automorphic {
         int n=7;
         int sqr=n*n;
         while (n>0) {
+            System.out.println(sqr);
             int lst = n % 10;
             int lst1 = sqr % 10;
             if (lst != lst1) {
