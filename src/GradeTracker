@@ -1,0 +1,139 @@
+ import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+    class Student {
+        private String name;
+        private List<Double> grades;
+
+        public Student(String name) {
+            this.name = name;
+            this.grades = new ArrayList<>();
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void addGrade(double grade) {
+            grades.add(grade);
+        }
+
+        public double getAverageGrade() {
+            if (grades.isEmpty()) {
+                return 0.0;
+            }
+            double sum = 0.0;
+            for (double grade : grades) {
+                sum += grade;
+            }
+            return sum / grades.size();
+        }
+
+        @Override
+        public String toString() {
+            return "Student{name='" + name + "', averageGrade=" + getAverageGrade() + "}";
+        }
+    }
+
+    public class GradeTracker {
+        private List<Student> students;
+        private Scanner scanner;
+
+        public GradeTracker() {
+            students = new ArrayList<>();
+            scanner = new Scanner(System.in);
+        }
+
+        public void addStudent() {
+            System.out.print("Enter student name: ");
+            String name = scanner.nextLine();
+            students.add(new Student(name));
+            System.out.println("Student added.");
+        }
+
+        public void recordGrade() {
+            System.out.print("Enter student name: ");
+            String name = scanner.nextLine();
+            Student student = findStudent(name);
+            if (student != null) {
+                System.out.print("Enter grade: ");
+                double grade = scanner.nextDouble();
+                scanner.nextLine(); // consume newline
+                student.addGrade(grade);
+                System.out.println("Grade recorded.");
+            } else {
+                System.out.println("Student not found.");
+            }
+        }
+
+        public void displayStudentGrades() {
+            System.out.print("Enter student name: ");
+            String name = scanner.nextLine();
+            Student student = findStudent(name);
+            if (student != null) {
+                System.out.println(student);
+            } else {
+                System.out.println("Student not found.");
+            }
+        }
+
+        private Student findStudent(String name) {
+            for (Student student : students) {
+                if (student.getName().equalsIgnoreCase(name)) {
+                    return student;
+                }
+            }
+            return null;
+        }
+
+        public void displayAllStudents() {
+            if (students.isEmpty()) {
+                System.out.println("No students found.");
+            } else {
+                for (Student student : students) {
+                    System.out.println(student);
+                }
+            }
+        }
+
+        public static void main(String[] args) {
+            GradeTracker gradeTracker = new GradeTracker();
+            Scanner scanner = new Scanner(System.in);
+
+            while (true) {
+                System.out.println("\nGrade Tracker Menu:");
+                System.out.println("1. Add Student");
+                System.out.println("2. Record Grade");
+                System.out.println("3. Display Student Grades");
+                System.out.println("4. Display All Students");
+                System.out.println("5. Exit");
+                System.out.print("Choose an option: ");
+                int option = scanner.nextInt();
+                scanner.nextLine(); // consume newline
+
+                switch (option) {
+                    case 1:
+                        gradeTracker.addStudent();
+                        break;
+                    case 2:
+                        gradeTracker.recordGrade();
+                        break;
+                    case 3:
+                        gradeTracker.displayStudentGrades();
+                        break;
+                    case 4:
+                        gradeTracker.displayAllStudents();
+                        break;
+                    case 5:
+                        System.out.println("Exiting...");
+                        scanner.close();
+                        System.exit(0);
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                }
+            }
+        }
+    }
+

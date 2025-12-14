@@ -1,0 +1,46 @@
+public class Getterandsetter {
+   /* private int x;
+    private int y;
+     public int getX(){
+         return x;
+     }
+     public void setX(int x1){
+         this.x=x1;
+//         System.out.println(x);
+     }
+}
+/*public class Getterandsetter {
+    private int x;
+    private int y;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x1) {
+        this.x = x1;
+    }
+}
+
+class Abc {
+    public static void main(String[] args) {
+        Getterandsetter g = new Getterandsetter();
+        g.setX(7);
+        System.out.println(g.getX());
+    }*/
+    int x=40;
+    int y=50;
+}
+class X extends Getterandsetter {
+     static  int x = 00;
+
+    public void key() {
+        System.out.println(this.x);
+        System.out.println(this.y);
+    }
+
+    public static void main(String arr[]) {
+        X x1 = new X();
+        x1.key();
+    }
+}
